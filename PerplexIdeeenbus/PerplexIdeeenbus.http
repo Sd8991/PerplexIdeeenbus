@@ -1,0 +1,138 @@
+@PerplexIdeeenbus_HostAddress = https://localhost:7023
+
+GET {{PerplexIdeeenbus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+// Hoort correct te werken
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+  "onderwerp": "Schuddebuikjes",
+ "beschrijving": "Ik zou graag Schuddebuikjes willen eten tijdens de lunch. Klik hier om hem toe te voegen",
+ "userId": 103,
+ "userName": "Daniël Knippers",
+ "type": "suggestie",
+ "categories": [ "lunch" ]
+}
+
+###
+// Hoort correct te werken
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+  "onderwerp": "Skiën",
+ "beschrijving": "Skiën de vorige keer was echt super awesome. Laten we dat dit jaar weer gaan doen!",
+ "userId": 12,
+ "userName": "Dennis Pullens",
+ "type": "uitje",
+ "beginDatum": "2022-11-24 09:00",
+ "eindDatum": "2022-11-28 16:00",
+ "categories": [ "fun", "intern", "sportief", "borrel" ]
+
+}
+
+###
+// Zou idealiter correct werken, maar mislukt momenteel door gebrek aan escape characters
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+  "onderwerp": "Schuddebuikjes",
+ "beschrijving": "<p>Ik zou graag Schuddebuikjes willen eten tijdens de lunch. Klik <a href='https://www.ah.nl/producten/ontbijtgranen-broodbelegtussendoor/zoet-broodbeleg/hagelslag-vlokken/schuddebuikjes'>hier</a> om hem toe te voegen</p>",
+ "userId": 103,
+ "userName": "Daniël Knippers",
+ "type": "suggestie",
+ "categories": [ "lunch" ]
+}
+
+###
+// Zou idealiter correct werken, maar mislukt momenteel door gebrek aan escape characters
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+   "onderwerp": "Skiën",
+ "beschrijving": "<p>Skiën de vorige keer was echt <i>super</i> awesome. Laten we dat dit jaar weer gaan doen!</p>",
+ "userId": 12,
+ "userName": "Dennis Pullens",
+ "type": "uitje",
+ "beginDatum": "2022-11-24 09:00",
+ "eindDatum": "2022-11-28 16:00",
+ "categories": [ "fun", "intern", "sportief", "borrel" ]
+}
+
+###
+// Hoort te mislukken door gebrek aan begin- en einddatum voor een uitje
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+  "onderwerp": "Skiën",
+ "beschrijving": "<p>Skiën de vorige keer was echt <i>super</i> awesome. Laten we dat dit jaar weer gaan doen!</p>",
+ "userId": 12,
+ "userName": "Dennis Pullens",
+ "type": "uitje",
+ "categories": [ "fun", "intern", "sportief", "borrel" ]
+}
+
+###
+// Hoort te mislukken omdat 'idee' geen geldig suggestietype is
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+  "onderwerp": "Schuddebuikjes",
+ "beschrijving": "Ik zou graag Schuddebuikjes willen eten tijdens de lunch. Klik hier om hem toe te voegen",
+ "userId": 103,
+ "userName": "Daniël Knippers",
+ "type": "idee",
+ "categories": [ "lunch" ]
+}
+
+###
+// Hoort te mislukken door gebrek aan beschrijving
+POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
+Content-Type: application/json
+
+{
+  "onderwerp": "Schuddebuikjes",
+ "userId": 103,
+ "userName": "Daniël Knippers",
+ "type": "suggestie",
+ "categories": [ "lunch" ]
+}
+
+###
+
+GET {{PerplexIdeeenbus_HostAddress}}/api/ideas
+
+###
+
+@id=1
+GET {{PerplexIdeeenbus_HostAddress}}/api/ideas/{{id}}
+
+###
+
+PUT {{PerplexIdeeenbus_HostAddress}}/api/ideas/1
+Content-Type: application/json
+
+{
+ "id": 1,
+ "onderwerp": "Schuddebuikjes",
+ "beschrijving": "Ik zou graag Schuddebuikjes willen eten tijdens de lunch.",
+ "userId": 103,
+ "userName": "Daniël Knippers",
+ "type": "suggestie",
+ "beginDatum": "0001-01-01 01:00",
+ "eindDatum": "0001-01-01 03:00",
+ "categories": [ "lunch" ]
+}
+
+###
+
+DELETE {{PerplexIdeeenbus_HostAddress}}/api/ideas/1
+
+###

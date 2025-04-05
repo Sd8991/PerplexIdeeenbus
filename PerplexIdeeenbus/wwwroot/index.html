@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ideeënbus</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Suggesties</h1>
+
+
+    <table>
+        <tr>
+            <th>Onderwerp</th>
+            <th>Beschrijving</th>
+            <th>UserID</th>
+            <th>Username</th>
+            <th>Type</th>
+            <th>Begindatum</th>
+            <th>Einddatum</th>
+            <th>Categorieën</th>
+        </tr>
+        <tbody id="ideas"></tbody>
+    </table>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getItems();
+    </script>
+</body>
+</html>
