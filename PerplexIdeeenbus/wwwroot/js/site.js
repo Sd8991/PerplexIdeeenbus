@@ -1,16 +1,18 @@
 ﻿const uri = '/api/ideas';
 let ideas = [];
 
-function getItems() {
+function getItems(filter) {
     fetch(uri)
         .then(response => response.json())
-        .then(data => _displayItems(data))
+        .then(data => _displayItems(data, filter))
         .catch(error => console.error('Unable to get items.', error));
 }
 
-function _displayItems(data) {
+function _displayItems(data, filter) {
     const tBody = document.getElementById('ideas');
     tBody.innerHTML = '';
+
+    data.sort((a, b) => _compareId(a, b));
 
     data.forEach(item => {
 
@@ -45,9 +47,29 @@ function _displayItems(data) {
         td7.appendChild(textNode7);
 
         let td8 = tr.insertCell(7);
-        let textNode8 = document.createTextNode(item.categories);
+        let textNode8 = document.createTextNode(item.duur);
         td8.appendChild(textNode8);
+
+        let td9 = tr.insertCell(8);
+        let textNode9 = document.createTextNode(item.categories);
+        td9.appendChild(textNode9);
     });
 
     ideas = data;
+}
+
+
+function _compareId(a, b) {
+    var aId = new Date(a.id);
+    var bId = new Date(b.id);
+
+    return bId - aId;
+}
+
+
+function _compareDate(a, b) {
+    var aDate = new Date(a.creationTime);
+    var bDate = new Date(b.creationTime);
+
+    return bDate - aDate;
 }

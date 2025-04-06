@@ -133,6 +133,6 @@ Content-Type: application/json
 
 ###
 
-DELETE {{PerplexIdeeenbus_HostAddress}}/api/ideas/1
+DELETE {{PerplexIdeeenbus_HostAddress}}/api/ideas/2
 
 ###

@@ -7,9 +7,12 @@ namespace PerplexIdeeenbus.Models
 
     public class Idea
     {
-        public int Id { get; set; }
+        public long Id { get; }
 
-        private DateTime _creationTime = DateTime.Now;
+        /*Mogelijke verbetering: DateTime.Now is niet bruikbaar op deze manier. Momenteel wordt the CreationTime aangepast bij elke GET van een Idea.
+         De huidige implementatie sorteert de data in site.js op het Id van de Ideas, in plaats van de CreationTime. Dit zou tot hetzelfde resultaat moeten leiden als een correcte sort op de CreationTime, 
+         aangezien Ids van verwijderde Ideas niet opnieuw gebruikt worden. Deze aanpak is echter wel beperkt door de maximale waarde van het Id. */
+        public DateTime CreationTime { get; } = DateTime.Now; 
 
         [Required]
         public string? Onderwerp { get; set; }
@@ -63,7 +66,7 @@ namespace PerplexIdeeenbus.Models
             }
         }
 
-        //public TimeSpan Duration { get { return _eindDatum.Subtract(_beginDatum); } } 
+        public TimeSpan Duur { get { return _eindDatum.Subtract(_beginDatum); } } 
 
         //public DateTime BeginDatum { get; set; }
         //public DateTime EindDatum { get; set; }
