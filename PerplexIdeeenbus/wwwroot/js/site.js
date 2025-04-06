@@ -1,18 +1,21 @@
 ﻿const uri = '/api/ideas';
 let ideas = [];
 
-function getItems(filter) {
+function getItems() {
     fetch(uri)
         .then(response => response.json())
-        .then(data => _displayItems(data, filter))
+        .then(data => _displayItems(data))
         .catch(error => console.error('Unable to get items.', error));
 }
 
-function _displayItems(data, filter) {
+function _displayItems(data) {
     const tBody = document.getElementById('ideas');
     tBody.innerHTML = '';
 
     data.sort((a, b) => _compareId(a, b));
+
+    var input = document.getElementById("idea_filter");
+    var filter = input.value;
 
     data.forEach(item => {
 
@@ -39,20 +42,30 @@ function _displayItems(data, filter) {
         td5.appendChild(textNode5);
 
         let td6 = tr.insertCell(5);
-        let textNode6 = document.createTextNode(item.beginDatum);
-        td6.appendChild(textNode6);
+        if (item.type === "uitje") {
+            let textNode6 = document.createTextNode(item.beginDatum);
+            td6.appendChild(textNode6);
+        }
 
         let td7 = tr.insertCell(6);
-        let textNode7 = document.createTextNode(item.eindDatum);
-        td7.appendChild(textNode7);
+        if (item.type === "uitje") {
+            let textNode7 = document.createTextNode(item.eindDatum);
+            td7.appendChild(textNode7);
+        }
 
         let td8 = tr.insertCell(7);
-        let textNode8 = document.createTextNode(item.duur);
-        td8.appendChild(textNode8);
+        if (item.type === "uitje") {
+            let textNode8 = document.createTextNode(item.duur);
+            td8.appendChild(textNode8);
+        }
 
         let td9 = tr.insertCell(8);
         let textNode9 = document.createTextNode(item.categories);
         td9.appendChild(textNode9);
+
+        if (filter != "" && filter != item.type) {
+            tr.style.display = "none";
+        }
     });
 
     ideas = data;

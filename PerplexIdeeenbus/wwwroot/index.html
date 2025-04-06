@@ -6,8 +6,13 @@
     <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
-    <h1>Suggesties</h1>
+    <h1>Ideeën</h1>
 
+    <select id="idea_filter" onchange="getItems()">
+        <option value="" selected>Alles</option>
+        <option value="suggestie">Suggesties</option>
+        <option value="uitje">Uitjes</option>
+    </select> 
 
     <table>
         <tr>
@@ -26,7 +31,7 @@
 
     <script src="js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        getItems('');
+        getItems();
     </script>
 </body>
 </html>
