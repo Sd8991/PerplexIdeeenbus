@@ -1,8 +1,5 @@
 @PerplexIdeeenbus_HostAddress = https://localhost:7023
 
-GET {{PerplexIdeeenbus_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ###
 // Hoort correct te werken
 POST {{PerplexIdeeenbus_HostAddress}}/api/ideas
@@ -116,7 +113,8 @@ GET {{PerplexIdeeenbus_HostAddress}}/api/ideas/{{id}}
 
 ###
 
-PUT {{PerplexIdeeenbus_HostAddress}}/api/ideas/1
+@id=1
+PUT {{PerplexIdeeenbus_HostAddress}}/api/ideas/{{id}}
 Content-Type: application/json
 
 {
